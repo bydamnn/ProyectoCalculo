@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>TerraSegura 3D · Análisis topográfico con cálculo multivariable</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header><span class="tag">Cálculo Multivariable · Proyecto de aula</span>
+        <h1>TerraSegura 3D: análisis topográfico preliminar</h1>
+        <p>Un terreno es una superficie z = h(x, y). Con derivadas parciales, gradiente, derivada direccional y puntos
+            críticos comparamos sitios y rutas. Arrastra para rotar, rueda para acercar y haz clic para ubicar puntos.
+        </p>
+    </header>
+    <main>
+        <div>
+            <div class="card">
+                <h2>Terreno 3D interactivo (10 × 10 km · exageración vertical ×5)</h2>
+                <div id="v"><canvas id="cv"></canvas></div>
+                <div class="seg" id="slots"><button data-k="P" class="on">● Punto de análisis</button><button
+                        data-k="A">A</button><button data-k="B">B</button><button data-k="C">C</button></div>
+                <div class="tg"><span style="color:var(--mu)">Color:</span><button data-m="h" class="on"
+                        id="mh">Altura</button><button data-m="s" id="ms">Pendiente</button>
+                    <label><input type="checkbox" id="kc" checked> Puntos críticos</label><label><input type="checkbox"
+                            id="kl"> Lluvia</label>
+                </div>
+                <p class="n">Se activa una ranura (P, A, B o C) y el siguiente clic en el terreno la mueve. Rutas: azul
+                    A→B directa, ámbar A→C→B.</p>
+            </div>
+            <div class="card warn">
+                <h2>Alcance y limitaciones</h2>
+                <p class="n" style="margin:0">El terreno es un <b>modelo sintético</b> y el resultado es un índice
+                    <b>topográfico preliminar</b>, no una predicción. Los deslizamientos e inundaciones reales dependen
+                    también de geología, tipo y humedad del suelo, lluvia, cobertura vegetal, nivel freático y drenajes.
+                    Para un caso real se debe sustituir h(x, y) por un modelo digital de elevación (DEM) y complementar
+                    con estudios técnicos.</p>
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <h2>1 · Motor matemático verificable</h2>
+                <div class="row"><label>Rumbo θ</label><input id="th" type="range" min="0" max="360" value="45"><b
+                        id="vth"></b></div>
+                <div class="math" id="p1"></div>
+                <div class="math" id="p2" style="margin-top:8px"></div>
+            </div>
+            <div class="card">
+                <h2>2 · Escorrentía preliminar: dr/dt = −∇h</h2>
+                <div class="math" id="p3"></div>
+            </div>
+            <div class="card">
+                <h2>3 · Comparador de ubicaciones</h2>
+                <div id="cmp"></div>
+                <div class="seg"><button id="best">✚ Sugerir mejor sitio en la ranura activa</button></div>
+                <p class="n">Índice = 100·exp(−(pendiente%/20)²), con factor 0.4 si el sitio queda bajo la cota de
+                    acumulación. Es un criterio de ejemplo y sus pesos son ajustables.</p>
+            </div>
+            <div class="card">
+                <h2>4 · Comparador de rutas (derivada direccional a lo largo del trazado)</h2>
+                <div id="rt"></div>
+            </div>
+            <div class="card">
+                <h2>5 · Puntos críticos ∇h = 0</h2>
+                <div class="math" id="p4"></div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

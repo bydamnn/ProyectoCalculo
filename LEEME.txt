@@ -1,0 +1,6 @@
+TerraSegura - Analisis topografico preliminar (Calculo Multivariable)
+Integrantes: Daniela Brito, Karim Castillo, Johanny Garavito
+
+Como usarlo: abrir index.html con doble clic en cualquier navegador.
+No requiere instalar nada ni conexion a internet (solo usa tipografia del sistema).
+Lenguajes: HTML5, CSS3 y JavaScript (render 3D propio en Canvas 2D).
